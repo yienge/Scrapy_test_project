@@ -32,9 +32,6 @@ class DmhySpider(CrawlSpider):
             # item['description'] = topic.select('text()').re('-\s([^\n]*?)\\n')
             items.append(item)
 
-        # add sleep for preventing blocked from website auto-detection system.
-        time.sleep(1)
-
         return items
 
     def parse_view(self, response):
@@ -49,5 +46,4 @@ class DmhySpider(CrawlSpider):
             # page['description'] = topic.select('a/text()').re('-\s([^\n]*?)\\n')
             pages.append(page)
 
-        time.sleep(1)
         return pages
