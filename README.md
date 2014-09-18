@@ -7,6 +7,6 @@ A simple Scrapy practice which will get the torrent links and names, and then sa
 
 ## Basic scrapy instructions:
 
-* scrapy startproject [project_name|ex:get_torrent] : create your new project
-* scrapy genspider -t [template_name|ex:crawl] [spider_name|ex:blog_spider] [scraped_domain|ex:blog.com] : create your spider from template
-* scrapy crawl [project_name|ex:get_torrent] : start crawling data
+* scrapy startproject [project_name] : create your new project
+* scrapy genspider -t [template_name] [spider_name] [scraped_domain] : create your spider from template
+* scrapy crawl [project_name] : start crawling data
