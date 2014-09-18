@@ -10,13 +10,12 @@ class DmhySpider(CrawlSpider):
     allowed_domains = ['dmhy.org']
     start_urls = [
         "http://share.dmhy.org/topics/list/sort_id/2/page/1",
-        # "http://share.dmhy.org/topics/list/sort_id/2/page/2",
-        # "http://share.dmhy.org/topics/list/sort_id/2/page/3",
     ]
 
     rules = (
         # this rule indicates what function will parse topics/list e.g. get next page
         # Rule(SgmlLinkExtractor(allow=('topics\/list', )), callback='parse_list'),
+
         # this rule indicates what function will parse topics/view
         Rule(SgmlLinkExtractor(allow=('topics\/view', )), callback='parse_view'),
     )
@@ -30,10 +29,12 @@ class DmhySpider(CrawlSpider):
             item = Website()
             item['name'] = topic.select('a/text()').extract()
             item['url'] = topic.select('a/@href').extract()
-            #item['description'] = topic.select('text()').re('-\s([^\n]*?)\\n')
+            # item['description'] = topic.select('text()').re('-\s([^\n]*?)\\n')
             items.append(item)
 
+        # add sleep for preventing blocked from website auto-detection system.
         time.sleep(1)
+
         return items
 
     def parse_view(self, response):
@@ -45,7 +46,7 @@ class DmhySpider(CrawlSpider):
             page = Page()
             page['name'] = topic.select('a/text()').extract()
             page['url'] = topic.select('a/@href').extract()
-            #page['description'] = topic.select('a/text()').re('-\s([^\n]*?)\\n')
+            # page['description'] = topic.select('a/text()').re('-\s([^\n]*?)\\n')
             pages.append(page)
 
         time.sleep(1)

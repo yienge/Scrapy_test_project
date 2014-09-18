@@ -6,12 +6,6 @@
 from scrapy.item import Item, Field
 
 
-class GetTorrentItem(Item):
-    # define the fields for your item here like:
-    # name = Field()
-    pass
-
-
 class Website(Item):
     name = Field()
     description = Field()
