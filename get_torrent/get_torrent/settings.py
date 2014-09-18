@@ -23,8 +23,6 @@ ITEM_PIPELINES = {
     'get_torrent.pipelines.FileWriterPipeline': 2
 }
 
-RANDOMIZE_DOWNLOAD_DELAY = True
-
 REDIRECT_MAX_TIMES = 20
 
 ROBOTSTXT_OBEY = False
@@ -107,6 +105,14 @@ MEMUSAGE_REPORT = False
 
 MEMUSAGE_WARNING_MB = 0
 
+
+##################
+# download settings:
+##################
+
+RANDOMIZE_DOWNLOAD_DELAY = True
+
+DOWNLOAD_DELAY = 2
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'get_torrent (+http://www.yourdomain.com)'
