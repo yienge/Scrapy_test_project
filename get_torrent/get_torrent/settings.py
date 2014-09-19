@@ -33,6 +33,7 @@ STATSMAILER_RCPTS = []
 URLLENGTH_LIMIT = 2083
 
 # if you want to pretent that you are a browser, you should change this.
+# and rotate the user-agent with different browser can avoid getting banned.
 # USER_AGENT = 'Scrapy/YOUR_SCRAPY_VERSION'
 
 EDITOR = 'vim'
@@ -111,12 +112,14 @@ MEMUSAGE_WARNING_MB = 0
 
 RANDOMIZE_DOWNLOAD_DELAY = True
 
+# increase download delay can avoid getting banned.
 DOWNLOAD_DELAY = 2
 
 ###################
 # cookies settings:
 ###################
 
+# disable cookies can avoid getting banned.
 COOKIES_ENABLED = True
 
 COOKIES_DEBUG = True
