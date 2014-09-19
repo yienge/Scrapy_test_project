@@ -10,6 +10,10 @@ A simple Scrapy practice which will get the torrent links and names, and then sa
 * http://blog.jobbole.com/73115/ (chinese)
 * http://doc.scrapy.org/en/latest/intro/tutorial.html (english)
 
+## Examples:
+
+* http://snipplr.com/all/tags/scrapy/
+
 ## instructions:
 
 * scrapy startproject get_torrent : create your new project
