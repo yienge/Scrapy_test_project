@@ -34,7 +34,18 @@ URLLENGTH_LIMIT = 2083
 
 # if you want to pretent that you are a browser, you should change this.
 # and rotate the user-agent with different browser can avoid getting banned.
+
+# default browser UA string
 # USER_AGENT = 'Scrapy/YOUR_SCRAPY_VERSION'
+
+# Chrome 37.0 UA string
+# USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
+
+# Firefox 31.0 UA string
+# USER_AGENT = 'Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0'
+
+# IE 10.0 UA string
+# USER_AGENT = 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)'
 
 # used for randomized user agent
 # USER_AGENT_LIST = []
