@@ -36,6 +36,9 @@ URLLENGTH_LIMIT = 2083
 # and rotate the user-agent with different browser can avoid getting banned.
 # USER_AGENT = 'Scrapy/YOUR_SCRAPY_VERSION'
 
+# used for randomized user agent
+# USER_AGENT_LIST = []
+
 EDITOR = 'vim'
 
 ###############

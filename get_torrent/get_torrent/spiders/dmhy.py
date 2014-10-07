@@ -2,7 +2,6 @@ from scrapy.selector import HtmlXPathSelector
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from get_torrent.items import Website, Page
-import time
 
 
 class DmhySpider(CrawlSpider):
