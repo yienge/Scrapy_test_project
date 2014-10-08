@@ -7,16 +7,19 @@ import requests
 def process_result(r):
     raw_res = r.json()
     # pp = pprint.PrettyPrinter(indent=4)
-    # pp.pprint(raw_res['hits']['hits'])
+    # pp.pprint(raw_res)
 
-    for item in raw_res['hits']['hits']:
-        result = item['_source']
-        print result['link']
-        print result['url']
-        print
+    if raw_res['hits']:
+        for item in raw_res['hits']['hits']:
+            result = item['_source']
+            print result['link']
+            print result['url']
+            print result['insert_date']
+            print
 
 keyword = raw_input('query:')
 count = raw_input('result number:')
+
 if keyword:
     r = requests.get('http://127.0.0.1:9200/dmhy/torrent/_search?q=' + keyword)
     process_result(r)

@@ -36,12 +36,14 @@ class DmhySpider(CrawlSpider):
     def parse_view(self, response):
         hxs = Selector(response)
         topics = hxs.xpath('//div[@id="tabs-1"]/p')
+        topic_info = hxs.xpath('//div[@class="resource-info"]/ul/li/span')
         pages = []
 
         for topic in topics:
             page = Page()
             page['name'] = topic.xpath('a/text()').extract()
             page['url'] = topic.xpath('a/@href').extract()
+            page['date'] = topic_info.xpath('text()').extract()
             # page['description'] = topic.xpath('a/text()').re('-\s([^\n]*?)\\n')
             pages.append(page)
 

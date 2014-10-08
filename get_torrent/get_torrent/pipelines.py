@@ -8,6 +8,7 @@
 import sys
 import requests
 import json
+import time
 
 if sys.getdefaultencoding() != 'utf-8':
     reload(sys)
@@ -30,6 +31,9 @@ class FilterWordsPipeline(object):
         if len(item['url']) and len(item['name']):
             url = unicode(item['url'].pop())
             link_title = unicode(item['name'].pop()).lower()
+
+            # TODO: infos contain two html elements such as size and date, so we need to use regex to pick date
+            # infos = unicode(item['date'].pop())
 
             if link_title and "magnet" not in link_title and "谷歌" not in link_title:
                 self.save_all_data(url, link_title)
@@ -60,7 +64,8 @@ class FilterWordsPipeline(object):
     def save_data_to_elastic_search(self, url, link_title):
         payload = json.dumps({
             'link': link_title,
-            'url': self.url_prefix + url.strip()
+            'url': self.url_prefix + url.strip(),
+            'insert_date': time.strftime("%Y-%m-%d %H:%M:%S")
         })
 
         requests.post('http://127.0.0.1:9200/dmhy/torrent', data=payload)
