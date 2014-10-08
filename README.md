@@ -1,7 +1,8 @@
 Scrapy_test_project
 ===================
 
-A simple Scrapy practice which will get the torrent links and names, and then save results to files.
+A simple Scrapy practice which will get the torrent links and names,
+and then save result data to files and local elasticsearch.
 
 (still under development)
 
@@ -9,8 +10,9 @@ A simple Scrapy practice which will get the torrent links and names, and then sa
 
 * http://blog.jobbole.com/73115/ (chinese)
 * http://doc.scrapy.org/en/latest/intro/tutorial.html (english)
+* http://www.elasticsearch.org/
 
-## Examples:
+## Snippets:
 
 * http://snipplr.com/all/tags/scrapy/
 
