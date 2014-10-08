@@ -1,4 +1,4 @@
-from scrapy.selector import HtmlXPathSelector
+from scrapy.selector import Selector
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from get_torrent.items import Website, Page
@@ -20,29 +20,29 @@ class DmhySpider(CrawlSpider):
     )
 
     def parse_list(self, response):
-        hxs = HtmlXPathSelector(response)
-        topics = hxs.select('//table[@id="topic_list"]/tbody/tr/td[@class="title"]')
+        hxs = Selector(response)
+        topics = hxs.xpath('//table[@id="topic_list"]/tbody/tr/td[@class="title"]')
         items = []
 
         for topic in topics:
             item = Website()
-            item['name'] = topic.select('a/text()').extract()
-            item['url'] = topic.select('a/@href').extract()
-            # item['description'] = topic.select('text()').re('-\s([^\n]*?)\\n')
+            item['name'] = topic.xpath('a/text()').extract()
+            item['url'] = topic.xpath('a/@href').extract()
+            # item['description'] = topic.xpath('text()').re('-\s([^\n]*?)\\n')
             items.append(item)
 
         return items
 
     def parse_view(self, response):
-        hxs = HtmlXPathSelector(response)
-        topics = hxs.select('//div[@id="tabs-1"]/p')
+        hxs = Selector(response)
+        topics = hxs.xpath('//div[@id="tabs-1"]/p')
         pages = []
 
         for topic in topics:
             page = Page()
-            page['name'] = topic.select('a/text()').extract()
-            page['url'] = topic.select('a/@href').extract()
-            # page['description'] = topic.select('a/text()').re('-\s([^\n]*?)\\n')
+            page['name'] = topic.xpath('a/text()').extract()
+            page['url'] = topic.xpath('a/@href').extract()
+            # page['description'] = topic.xpath('a/text()').re('-\s([^\n]*?)\\n')
             pages.append(page)
 
         return pages
