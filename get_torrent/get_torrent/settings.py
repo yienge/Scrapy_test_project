@@ -20,17 +20,16 @@ DEFAULT_ITEM_CLASS = 'get_torrent.items.Website'
 
 ITEM_PIPELINES = {
     'get_torrent.pipelines.FilterWordsPipeline': 1,
-    'get_torrent.pipelines.FileWriterPipeline': 2
 }
 
 REDIRECT_MAX_TIMES = 20
 
 ROBOTSTXT_OBEY = False
 
+URLLENGTH_LIMIT = 2083
+
 # people who will receive stats report after scrapy finishes.
 STATSMAILER_RCPTS = []
-
-URLLENGTH_LIMIT = 2083
 
 # if you want to pretent that you are a browser, you should change this.
 # and rotate the user-agent with different browser can avoid getting banned.
