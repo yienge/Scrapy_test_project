@@ -7,7 +7,7 @@ import json
 
 def process_result(r):
     raw_res = r.json()
-    # pp = pprint.PrettyPrinter(indent=4)
+    # pp = pprint.PrettyPrinter(indent=2)
     # pp.pprint(raw_res)
 
     if raw_res['hits']:
@@ -23,7 +23,6 @@ count = raw_input('result number:')
 
 if not count:
     count = '50'
-
 
 if keyword:
     payload = json.dumps({
