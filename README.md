@@ -12,9 +12,14 @@ and then save result data to files and local elasticsearch.
 * scrapy http://doc.scrapy.org/en/latest/intro/tutorial.html (english)
 * elasticsearch http://www.elasticsearch.org/
 
-## Snippets:
+## Scrapy Snippets:
 
 * http://snipplr.com/all/tags/scrapy/
+
+## Required:
+
+* To use query functionality, you need to install elasticsearch first. Please download it from http://www.elasticsearch.org/
+* Once you have installed elasticsearch, run the scrapy project, and then the data will be imported into elasticsearch.
 
 ## instructions:
 
@@ -22,8 +27,3 @@ and then save result data to files and local elasticsearch.
 * scrapy genspider -t crawl dmhy dmhy.org : create your spider from template
 * scrapy crawl dmhy : start crawling data
 * scrapy crawl dmhy -s LOG_FILE=my_scrapy.log
-
-## Required:
-
-* To use query functionality, you need to install elasticsearch first. Please download it from http://www.elasticsearch.org/
-* Once you have installed elasticsearch, run the scrapy project, and then the data will be imported into elasticsearch.
