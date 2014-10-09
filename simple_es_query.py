@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import requests
 # import pprint
+import json
 
 
 def process_result(r):
@@ -20,12 +21,19 @@ def process_result(r):
 keyword = raw_input('query:')
 count = raw_input('result number:')
 
-if keyword:
-    r = requests.get('http://127.0.0.1:9200/dmhy/torrent/_search?q=' + keyword)
-    process_result(r)
-else:
-    if not count:
-        count = '50'
+if not count:
+    count = '50'
 
-    r = requests.get('http://127.0.0.1:9200/dmhy/torrent/_search?pretty=true&q=*:*&size=' + count)
-    process_result(r)
+
+if keyword:
+    payload = json.dumps({
+        'query': {'term': {'link': keyword}},
+        'sort': [{'insert_date': {'order': 'asc'}}],
+        'size': count
+    })
+    r = requests.post('http://127.0.0.1:9200/torrent/dmhy/_search',
+                      data=payload)
+else:
+    r = requests.get('http://127.0.0.1:9200/torrent/dmhy/_search?pretty=true&q=*:*&size=' + count)
+
+process_result(r)

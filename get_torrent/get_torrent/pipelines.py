@@ -68,7 +68,7 @@ class FilterWordsPipeline(object):
             'insert_date': time.strftime("%Y-%m-%d %H:%M:%S")
         })
 
-        requests.post('http://127.0.0.1:9200/dmhy/torrent', data=payload)
+        requests.post('http://127.0.0.1:9200/torrent/dmhy', data=payload)
         pass
 
 
