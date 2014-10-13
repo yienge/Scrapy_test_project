@@ -17,6 +17,7 @@ def process_result(r):
             print 'name: %s\nurl : %s\ndate: %s\nsize: %s' % (result['link'], result['url'], result['insert_date'], result['size'])
             print
 
+
 keyword = raw_input('query:')
 count = raw_input('result number:')
 
@@ -26,7 +27,11 @@ if not count:
 if keyword:
     payload = json.dumps({
         'query': {'term': {'link': keyword}},
-        'sort': [{'insert_date': {'order': 'asc'}}],
+        'sort': [
+            {'insert_date': {'order': 'desc'}},
+            {'size': 'desc'},
+            "_score"
+        ],
         'size': count
     })
     r = requests.post('http://127.0.0.1:9200/torrent/dmhy/_search',

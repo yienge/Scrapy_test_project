@@ -18,12 +18,10 @@ class FilterWordsPipeline(object):
     """A pipeline for filtering out items which contain certain words in their description"""
 
     def __init__(self):
-        self.file = open('result.txt', 'w')
         self.file_with_complete_data = open('result_total.txt', 'w')
         self.url_prefix = 'http://share.dmhy.org'
 
     def __del__(self):
-        self.file.close()
         self.file_with_complete_data.close()
 
     def process_item(self, item, spider):
@@ -33,7 +31,6 @@ class FilterWordsPipeline(object):
             date       = unicode(item['date'])
             file_size  = unicode(item['size'])
             self.save_all_data(url, link_title, date, file_size)
-            self.save_data_with_kw(url, link_title, date, file_size)
             self.save_data_to_elastic_search(url, link_title, date, file_size)
 
         return item
@@ -45,21 +42,6 @@ class FilterWordsPipeline(object):
             'date: ' + date.strip() + '\n' +
             'size: ' + file_size.strip() + 'MB\n\n'
         )
-
-    def save_data_with_kw(self, url, link_title, date, file_size):
-        # translation_group = ['Dymy']
-        title_keywords = ['hunter', 'fairy', 'haikyuu']
-
-        # for group in translation_group:
-        for keywords in title_keywords:
-            # if group in link_title and keywords in link_title:
-            if keywords in link_title:
-                self.file.write(
-                    'name: ' + link_title.strip() + '\n' +
-                    'URL: '  + self.url_prefix + url.strip() + '\n' +
-                    'date: ' + date.strip() + '\n' +
-                    'size: ' + file_size.strip() + 'MB\n\n'
-                )
 
     def save_data_to_elastic_search(self, url, link_title, date, file_size):
         payload = json.dumps({
