@@ -14,6 +14,7 @@ class Website(Item):
 
 
 class Page(Item):
+    serial = Field()
     name = Field()
     description = Field()
     url = Field()

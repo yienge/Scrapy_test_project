@@ -1,7 +1,6 @@
 # coding=utf-8
 
 # Define your item pipelines here
-#
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
@@ -30,8 +29,9 @@ class FilterWordsPipeline(object):
             link_title = unicode(item['name']).lower()
             date       = unicode(item['date'])
             file_size  = unicode(item['size'])
+            serial     = item['serial']
             self.save_all_data(url, link_title, date, file_size)
-            self.save_data_to_elastic_search(url, link_title, date, file_size)
+            self.save_data_to_es(serial, url, link_title, date, file_size)
 
         return item
 
@@ -43,7 +43,7 @@ class FilterWordsPipeline(object):
             'size: ' + file_size.strip() + 'MB\n\n'
         )
 
-    def save_data_to_elastic_search(self, url, link_title, date, file_size):
+    def save_data_to_es(self, serial, url, link_title, date, file_size):
         payload = json.dumps({
             'link'        : link_title,
             'url'         : self.url_prefix + url.strip(),
@@ -51,7 +51,8 @@ class FilterWordsPipeline(object):
             'size'        : file_size.strip(),
         })
 
-        requests.post('http://127.0.0.1:9200/torrent/dmhy', data=payload)
+        post_url = 'http://127.0.0.1:9200/torrent/dmhy/%s' % serial
+        requests.post(post_url, data=payload)
         pass
 
 

@@ -43,6 +43,10 @@ class DmhySpider(CrawlSpider):
 
     def parse_view(self, response):
         hxs = Selector(response)
+        page_url = response.url
+        pattern = re.compile('http://share.dmhy.org/topics/view/(\d+)_.*')
+        match = pattern.match(page_url)
+        serial = match.group(1)
 
         topic_infos = hxs.xpath('//div[contains(@class, "resource-info")]/ul/li/span/text()')
         pattern = re.compile('.*/.*/.* .*:.*')
@@ -69,6 +73,7 @@ class DmhySpider(CrawlSpider):
                 url = tab_url
 
         page = Page()
+        page['serial'] = serial
         page['name'] = name
         page['url'] = url
         if file_size:

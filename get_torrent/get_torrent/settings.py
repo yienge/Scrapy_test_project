@@ -116,14 +116,14 @@ DEPTH_STATS_VERBOSE = False
 # log settings:
 ###############
 
-LOG_ENABLED = True
+# LOG_ENABLED = True
 
-LOG_FILE = 'scrapy.log'
+# LOG_FILE = 'scrapy.log'
 
 # LOG_LEVEL = 'DEBUG'
-LOG_LEVEL = 'ERROR'
+# LOG_LEVEL = 'ERROR'
 
-LOG_STDOUT = 'False'
+# LOG_STDOUT = 'False'
 
 
 #################
