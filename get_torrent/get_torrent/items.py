@@ -18,3 +18,4 @@ class Page(Item):
     description = Field()
     url = Field()
     date = Field()
+    size = Field()

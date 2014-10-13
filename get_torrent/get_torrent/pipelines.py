@@ -8,7 +8,6 @@
 import sys
 import requests
 import json
-import time
 
 if sys.getdefaultencoding() != 'utf-8':
     reload(sys)
@@ -29,26 +28,25 @@ class FilterWordsPipeline(object):
 
     def process_item(self, item, spider):
         if len(item['url']) and len(item['name']):
-            url = unicode(item['url'].pop())
-            link_title = unicode(item['name'].pop()).lower()
-
-            # TODO: infos contain two html elements such as size and date, so we need to use regex to pick date
-            # infos = unicode(item['date'].pop())
-
-            if link_title and "magnet" not in link_title and "谷歌" not in link_title:
-                self.save_all_data(url, link_title)
-                self.save_data_with_kw(url, link_title)
-                self.save_data_to_elastic_search(url, link_title)
+            url        = unicode(item['url'])
+            link_title = unicode(item['name']).lower()
+            date       = unicode(item['date'])
+            file_size  = unicode(item['size'])
+            self.save_all_data(url, link_title, date, file_size)
+            self.save_data_with_kw(url, link_title, date, file_size)
+            self.save_data_to_elastic_search(url, link_title, date, file_size)
 
         return item
 
-    def save_all_data(self, url, link_title):
+    def save_all_data(self, url, link_title, date, file_size):
         self.file_with_complete_data.write(
             'name: ' + link_title.strip() + '\n' +
-            'URL: ' + self.url_prefix + url.strip() + '\n\n'
+            'URL: ' + self.url_prefix + url.strip() + '\n' +
+            'date: ' + date.strip() + '\n' +
+            'size: ' + file_size.strip() + 'MB\n\n'
         )
 
-    def save_data_with_kw(self, url, link_title):
+    def save_data_with_kw(self, url, link_title, date, file_size):
         # translation_group = ['Dymy']
         title_keywords = ['hunter', 'fairy', 'haikyuu']
 
@@ -58,14 +56,17 @@ class FilterWordsPipeline(object):
             if keywords in link_title:
                 self.file.write(
                     'name: ' + link_title.strip() + '\n' +
-                    'URL: ' + self.url_prefix + url.strip() + '\n\n'
+                    'URL: '  + self.url_prefix + url.strip() + '\n' +
+                    'date: ' + date.strip() + '\n' +
+                    'size: ' + file_size.strip() + 'MB\n\n'
                 )
 
-    def save_data_to_elastic_search(self, url, link_title):
+    def save_data_to_elastic_search(self, url, link_title, date, file_size):
         payload = json.dumps({
-            'link': link_title,
-            'url': self.url_prefix + url.strip(),
-            'insert_date': time.strftime("%Y-%m-%d %H:%M:%S")
+            'link'        : link_title,
+            'url'         : self.url_prefix + url.strip(),
+            'insert_date' : date.strip(),
+            'size'        : file_size.strip(),
         })
 
         requests.post('http://127.0.0.1:9200/torrent/dmhy', data=payload)
