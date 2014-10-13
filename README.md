@@ -15,6 +15,7 @@ and then save result data to files and local elasticsearch.
 ## Scrapy Snippets:
 
 * http://snipplr.com/all/tags/scrapy/
+* https://github.com/scrapinghub/testspiders
 
 ## Required:
 

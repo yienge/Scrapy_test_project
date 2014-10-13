@@ -11,11 +11,10 @@ def process_result(r):
     # pp.pprint(raw_res)
 
     if raw_res['hits']:
+        print
         for item in raw_res['hits']['hits']:
             result = item['_source']
-            print result['link']
-            print result['url']
-            print result['insert_date']
+            print 'name: %s\nurl : %s\ndate: %s\nsize: %s' % (result['link'], result['url'], result['insert_date'], result['size'])
             print
 
 keyword = raw_input('query:')
