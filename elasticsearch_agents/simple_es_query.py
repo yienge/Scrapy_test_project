@@ -20,7 +20,11 @@ def process_result(r):
 
 keyword = raw_input('query:')
 serial = raw_input('serial:')
+insert_date_order = raw_input('insert_date order:')
 count = raw_input('result number:')
+
+if not insert_date_order:
+    insert_date_order = 'desc'
 
 if not count:
     count = '50'
@@ -35,9 +39,10 @@ if serial:
     print data['size']
 elif keyword:
     payload = json.dumps({
+        'fields': ['link', 'url', 'insert_date', 'size'],
         'query': {'term': {'link': keyword}},
         'sort': [
-            {'insert_date': {'order': 'desc'}},
+            {'insert_date': {'order': insert_date_order, 'mode': 'avg'}},
             {'size': 'desc'},
             "_score"
         ],
