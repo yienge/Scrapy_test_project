@@ -39,7 +39,6 @@ if serial:
     print data['size']
 elif keyword:
     payload = json.dumps({
-        'fields': ['link', 'url', 'insert_date', 'size'],
         'query': {'term': {'link': keyword}},
         'sort': [
             {'insert_date': {'order': insert_date_order, 'mode': 'avg'}},
