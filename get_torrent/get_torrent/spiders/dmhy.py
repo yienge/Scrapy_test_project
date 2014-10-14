@@ -17,6 +17,9 @@ class DmhySpider(CrawlSpider):
     allowed_domains = ['dmhy.org']
     start_urls = [
         "http://share.dmhy.org/topics/list/sort_id/2/page/1",
+        "http://share.dmhy.org/topics/list/sort_id/2/page/2",
+        "http://share.dmhy.org/topics/list/sort_id/2/page/3",
+        "http://share.dmhy.org/topics/list/sort_id/2/page/4",
     ]
 
     rules = (

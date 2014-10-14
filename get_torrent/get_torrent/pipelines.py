@@ -54,9 +54,3 @@ class FilterWordsPipeline(object):
         post_url = 'http://127.0.0.1:9200/torrent/dmhy/%s' % serial
         requests.post(post_url, data=payload)
         pass
-
-
-class FileWriterPipeline(object):
-
-    def process_item(self, item, spider):
-        return item
